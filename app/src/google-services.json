@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "792945836005",
+    "project_id": "poli-gc-admin",
+    "storage_bucket": "poli-gc-admin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:792945836005:android:a4fe690bba35c2ec7f790c",
+        "android_client_info": {
+          "package_name": "com.juandev.poli_gc_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "792945836005-4dk9lf65ibmdmsul0rif79uf0bgguag3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.juandev.poli_gc_admin",
+            "certificate_hash": "cd4070d7b114e7b7344ff5d8b317debf220bcf9d"
+          }
+        },
+        {
+          "client_id": "792945836005-tr8qm7odran6e3qsv5kb9fubbfjf79lq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeSkh9bhK3UvWR-Vvb1uohl6MDjVgrSC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "792945836005-tr8qm7odran6e3qsv5kb9fubbfjf79lq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
