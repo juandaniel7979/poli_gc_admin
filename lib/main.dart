@@ -6,6 +6,7 @@ import 'package:poli_gc_admin/screens/message_screen.dart';
 import 'package:poli_gc_admin/services/admin_services.dart';
 import 'package:poli_gc_admin/services/auth_services.dart';
 import 'package:poli_gc_admin/services/push_notifications_service.dart';
+import 'package:poli_gc_admin/services/search_service.dart';
 import 'package:poli_gc_admin/share_preferences/preferences.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,7 @@ void main() async {
         providers: [
           ChangeNotifierProvider( create: ( _ ) => AuthService()),
           ChangeNotifierProvider( create: ( _ ) => AdminService()),
+          ChangeNotifierProvider( create: ( _ ) => SearchService()),
       ],
       child: const MyApp(),
       ));

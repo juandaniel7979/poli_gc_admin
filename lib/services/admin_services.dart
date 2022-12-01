@@ -17,12 +17,15 @@ class AdminService extends ChangeNotifier{
   String _selectedRol = 'PROFESOR';
   List<String> roles = ['PROFESOR', 'ESTUDIANTE'];
   Map<String,List<Usuario>> usersByRol = {};
+  // List<Usuario> profesores = [];
+  // List<Usuario> estudiantes = [];
 
   AdminService(){
     roles.forEach((item) {
       usersByRol[item] = List<Usuario>.empty(growable: true);
     });
     getUsuariosByRol(rol: _selectedRol);
+    getUsuariosByRol(rol: "ESTUDIANTE");
   }
 
   bool get isLoading => _isLoading;
@@ -41,6 +44,8 @@ class AdminService extends ChangeNotifier{
   
   List<Usuario> get getUsersPorRol => usersByRol[selectedRol]!;
 
+  List<Usuario> get getProfesores=> usersByRol["PROFESOR"]!;
+  List<Usuario> get getEstudiantes=> usersByRol["ESTUDIANTE"]!;
 
 
 
@@ -49,7 +54,6 @@ class AdminService extends ChangeNotifier{
 
   getUsuariosByRol({ String estado = "pendiente", required String rol})async {
     final Map<String,dynamic> filterData = {
-      'estado': estado,
       'rol': rol
     };
 
@@ -77,35 +81,32 @@ class AdminService extends ChangeNotifier{
   }
 
 
-Future ApproveUser( String id, String estado ) async {
+Future manageState( String id, String estado, String rol ) async {
+    final token = await storage.read(key: 'token') ?? '';
     final Map<String,dynamic> userData = {
-        '_id': id,
         'estado': estado
     };
-    print(estado);
-    final url = Uri.parse( '$_baseUrl/api/categoria');
+    final url = Uri.parse( 'http://$_baseUrl/api/usuarios/admin/$id');
+    print(url);
     try {
-    final token = await storage.read(key: 'token') ?? '';
-    if(token ==''){ print('No hay token en el request: '); return null;}
-    print(token);
-    final resp = await http.post(url,
-    body: json.encode(userData),
-    headers: {
-      "Content-Type": "application/json", 
-      'x-token': token
-    }
-    ).timeout(const Duration(seconds: 30));
-    print(resp.body);  
-    // usuarios.remove(value)    
-    final Map<String, dynamic> decodedResp = json.decode( resp.body);
+      if(token ==''){ print('No hay token en el request: '); return null;}
+      print(token);
+      final resp = await http.put(url,
+      body: json.encode(userData),
+      headers: {
+        "Content-Type": "application/json", 
+        'x-token': token
+      }
+      );
+      print(resp.body);  
+      // usuarios.remove(value)    
+      final Map<String, dynamic> decodedResp = json.decode( resp.body);
 
-    // if( decodedResp.containsKey('id_profesor')) {
-    //   return null;
-    // }else{
-    //   print(decodedResp['errors'][0]);
-    //   return 'error';
-    // }
-      
+      if(resp.statusCode ==200){
+        final index = usersByRol[rol]!.indexWhere((element) => element.uid == id);
+        usersByRol[rol]![index].estado = estado;
+      }
+
     } catch (e) {
       // print(e);
       // isSaving = false;

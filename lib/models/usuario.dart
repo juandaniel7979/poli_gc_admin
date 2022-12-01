@@ -39,7 +39,6 @@ class Usuarios {
 
 class Usuario {
     Usuario({
-        this.siguiendo,
         required this.nit,
         required this.nombre,
         this.nombre2,
@@ -47,13 +46,11 @@ class Usuario {
         this.apellido2,
         this.imagen,
         required this.correo,
-        required this.contrasena,
         required this.rol,
         required this.estado,
         this.uid,
     });
 
-    final List<dynamic>? siguiendo;
     final String nit;
     final String nombre;
     String? nombre2;
@@ -61,7 +58,6 @@ class Usuario {
     String? apellido2;
     String? imagen;
     final String correo;
-    final String contrasena;
     final String rol;
     String estado;
     final String? uid;
@@ -74,14 +70,12 @@ class Usuario {
     String toJson() => json.encode(toMap());
 
     factory Usuario.fromMap(Map<String, dynamic> json) => Usuario(
-        siguiendo: List<dynamic>.from(json["siguiendo"].map((x) => x)),
         nit: json["nit"],
         nombre: json["nombre"],
         nombre2: json["nombre_2"] == null ? null : json["nombre_2"],
         apellido: json["apellido"],
         apellido2: json["apellido_2"]  == null ? null : json["apellido_2"],
         correo: json["correo"],
-        contrasena: json["contrasena"],
         imagen: json["imagen"]  == null ? null : json["imagen"],
         rol: json["rol"],
         estado: json["estado"],
@@ -89,14 +83,12 @@ class Usuario {
     );
 
     Map<String, dynamic> toMap() => {
-        "siguiendo": null,
         "nit": nit,
         "nombre": nombre,
         "nombre_2": nombre2 == null ? null : nombre2,
         "apellido": apellido,
         "apellido_2": apellido2 == null ? null : nombre2,
         "correo": correo,
-        "contrasena": contrasena,
         "rol": rol,
         "estado": estado,
         "uid": uid,
